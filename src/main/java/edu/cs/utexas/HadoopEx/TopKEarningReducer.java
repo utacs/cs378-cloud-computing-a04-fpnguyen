@@ -36,6 +36,7 @@ public class TopKEarningReducer extends Reducer<Text, FloatArrayWritable, Text, 
      * @throws IOException
      * @throws InterruptedException
      */
+    @Override
     public void reduce(Text key, Iterable<FloatArrayWritable> values, Context context)
             throws IOException, InterruptedException {
 
@@ -84,8 +85,9 @@ public class TopKEarningReducer extends Reducer<Text, FloatArrayWritable, Text, 
         for (DriverEarnings value : values) {
             Text val = new Text(value.toString());
             context.write(value.getDriverID(), val);
-            logger.info("TopKReducer - Top-10 Airlines are:  " + value.getDriverID() + "  Ratio:"
-                    + value.getRatio());
+            System.out.println("(" + value.getDriverID() + ", " + value.toString() + ")");
+            // logger.info("TopKReducer - Top-10 Airlines are:  " + value.getDriverID() + "  Ratio:"
+            //         + value.getRatio());
         }
 
     }

@@ -29,10 +29,14 @@ public class TopKEarningMapper extends Mapper<Text, Text, Text, FloatArrayWritab
 	 * @param key
 	 * @param value a float value stored as a string
 	 */
+	@Override
 	public void map(Text key, Text val, Context context)
 			throws IOException, InterruptedException {
-
+		System.out.println("before");
 		String[] parts = val.toString().split(",");
+		for (int i = 0; i < parts.length; i++){
+			System.out.println(parts[i]);
+		}
 		float money = Float.parseFloat(parts[0]);
 		float seconds = Float.parseFloat(parts[1]);
 

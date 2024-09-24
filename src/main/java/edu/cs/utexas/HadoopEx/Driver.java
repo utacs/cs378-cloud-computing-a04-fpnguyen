@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IntWritable;
 // import org.apache.hadoop.io.ArrayWritable;
 // import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -37,65 +38,94 @@ public class Driver extends Configured implements Tool {
 		try {
 			Configuration conf = new Configuration();
 
-			Job job = new Job(conf, "WordCount");
-			job.setJarByClass(Driver.class);
+			// TASK 1
+			Job job1 = new Job(conf, "Driver1");
+			job1.setJarByClass(Driver.class);
 
 			// specify a Mapper
-			job.setMapperClass(EarningRateMapper.class);
+			job1.setMapperClass(ErrorCountMapper.class);
 
 			// specify a Reducer
-			// job.setReducerClass(EarningRateReducer.class);
+			job1.setReducerClass(ErrorCountReducer.class);
 
 			// specify output types
-			job.setOutputKeyClass(Text.class);
-			job.setOutputValueClass(FloatArrayWritable.class);
+			job1.setOutputKeyClass(IntWritable.class);
+			job1.setOutputValueClass(IntWritable.class);
 
 			// specify input and output directories
-			FileInputFormat.addInputPath(job, new Path(args[0]));
-			job.setInputFormatClass(TextInputFormat.class);
+			FileInputFormat.addInputPath(job1, new Path(args[0]));
+			job1.setInputFormatClass(TextInputFormat.class);
 
-			FileOutputFormat.setOutputPath(job, new Path(args[1]));
-			job.setOutputFormatClass(TextOutputFormat.class);
+			FileOutputFormat.setOutputPath(job1, new Path(args[2]));
+			job1.setOutputFormatClass(TextOutputFormat.class);
 
-			job.setMapOutputKeyClass(Text.class);
-			job.setMapOutputValueClass(IntWritable.class);
 
-			if (!job.waitForCompletion(true)) {
+			if (!job1.waitForCompletion(true)) {
 				return 1;
 			}
 
-			System.out.println("job 1 done");
+			// TASK 2
 
-			// Job job2 = new Job(conf, "TopK");
-			// job2.setJarByClass(Driver.class);
+
+
+			// TASK 3
+
+			// Job job4 = new Job(conf, "Driver3");
+			// job4.setJarByClass(Driver.class);
 
 			// // specify a Mapper
-			// job2.setMapperClass(TopKEarningMapper.class);
+			// job4.setMapperClass(EarningRateMapper.class);
 
 			// // specify a Reducer
-			// job2.setReducerClass(TopKEarningReducer.class);
+			// job4.setReducerClass(EarningRateReducer.class);
 
 			// // specify output types
-			// job2.setOutputKeyClass(Text.class);
-			// job2.setOutputValueClass(Text.class);
-
-			// // set the number of reducer to 1
-			// job2.setNumReduceTasks(1);
+			// job4.setOutputKeyClass(Text.class);
+			// job4.setOutputValueClass(Text.class);
+			// job4.setMapOutputValueClass(FloatArrayWritable.class);
 
 			// // specify input and output directories
-			// FileInputFormat.addInputPath(job2, new Path(args[1]));
-			// job2.setInputFormatClass(KeyValueTextInputFormat.class);
+			// FileInputFormat.addInputPath(job4, new Path(args[0]));
+			// job4.setInputFormatClass(TextInputFormat.class);
 
-			// FileOutputFormat.setOutputPath(job2, new Path(args[2]));
-			// job2.setOutputFormatClass(TextOutputFormat.class);
+			// FileOutputFormat.setOutputPath(job4, new Path(args[1] + "job4"));
+			// job4.setOutputFormatClass(TextOutputFormat.class);
 
-			// return (job2.waitForCompletion(true) ? 0 : 1);
+
+			// if (!job4.waitForCompletion(true)) {
+			// 	return 1;
+			// }
+
+			// Job job5 = new Job(conf, "TopK3");
+			// job5.setJarByClass(Driver.class);
+
+			// // specify a Mapper
+			// job5.setMapperClass(TopKEarningMapper.class);
+
+			// // specify a Reducer
+			// job5.setReducerClass(TopKEarningReducer.class);
+
+			// // specify output types
+			// job5.setOutputKeyClass(Text.class);
+			// job5.setOutputValueClass(Text.class);
+			// job5.setMapOutputValueClass(FloatArrayWritable.class);
+
+			// // set the number of reducer to 1
+			// job5.setNumReduceTasks(1);
+
+			// // specify input and output directories
+			// FileInputFormat.addInputPath(job5, new Path(args[1] + "job4"));
+			// job5.setInputFormatClass(KeyValueTextInputFormat.class);
+
+			// FileOutputFormat.setOutputPath(job5, new Path(args[2] + "job5"));
+			// job5.setOutputFormatClass(TextOutputFormat.class);
+
+			return (job1.waitForCompletion(true) ? 0 : 1);
 
 		} catch (InterruptedException | ClassNotFoundException | IOException e) {
 			System.err.println("Error during driver job.");
 			e.printStackTrace();
 			return 2;
 		}
-		return -1;
 	}
 }

@@ -67,7 +67,7 @@ public class DriverEarnings implements Comparable<DriverEarnings> {
 
         public String toString(){
 
-            return "("+ driverID.toString() +" , "+((FloatWritable)vals.get()[0]).get() +" , "+ ((FloatWritable)vals.get()[1]).get()+")";
+            return Float.toString(((FloatWritable)vals.get()[0]).get()  / ((FloatWritable)vals.get()[1]).get() * 60);
         }
     }
 
