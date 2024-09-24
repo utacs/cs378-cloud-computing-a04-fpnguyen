@@ -1,10 +1,13 @@
 package edu.cs.utexas.HadoopEx;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
+
 
 public class ErrorCountMapper extends Mapper<Object, Text, IntWritable, IntWritable> {
 
@@ -20,9 +23,15 @@ public class ErrorCountMapper extends Mapper<Object, Text, IntWritable, IntWrita
         IntWritable startHour;
         IntWritable endHour;
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime startDT = LocalDateTime.parse(tok[2], formatter);
+        LocalDateTime endDT = LocalDateTime.parse(tok[3], formatter);
+
         // error checking
         try {
-
+            if (endDT.isBefore(startDT)) {
+                return;
+            }
             if (tok.length != 17) {
                 return;
             }

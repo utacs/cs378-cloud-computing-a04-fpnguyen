@@ -12,3 +12,5 @@ buildNumber.properties
 taxi-data-sorted-small.csv
 task/
 taskjob5_small/
+output*/
+inter*/
