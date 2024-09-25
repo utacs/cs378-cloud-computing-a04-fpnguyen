@@ -2,14 +2,21 @@
 
 ## Team members' names 
 
-1. Student Name:
+1. Student Name: Caroline Gao
 
-   Student UT EID:
+   Student UT EID: cg46432
 
-2. Student Name:
+2. Student Name: Sarvesh Chezhian
 
-   Student UT EID:
+   Student UT EID: sc64893
 
+3. Student Name: Faith Nguyen
+
+   Student UT EID: pnn329
+
+4. Student Name: Khang Tran
+
+   Student UT EID: kht446
  ...
 
 ##  Course Name: CS378 - Cloud Computing 
@@ -75,3 +82,21 @@ Or has hadoop application
 Create a single gar file with eclipse 
 
 *  File export -> export  -> export as binary ->  "Extract generated libraries into generated JAR"
+
+## Machines running on the cloud
+
+![](dataproc.png)
+
+## Hadoop yarn history
+
+![](hadoop1.png)
+![](hadoop2.png)
+![](hadoop3.png)
+![](hadoop4.png)
+![](hadoop5.png)
+
+## Results for each task are in the results folder
+
+[Task 1](/results/output_task1)
+[Task 2](/results/output_task2)
+[Task 3](/results/output_task3)
